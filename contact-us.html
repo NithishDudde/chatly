@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatly - Contact Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+        }
+
+        .faq {
+            margin-top: 20px;
+        }
+
+        .faq h3 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .contact-form {
+            margin-top: 20px;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Contact Us / Help & FAQ</h2>
+
+    <div class="contact-info">
+        <p><strong>Email:</strong> support@chatly.com</p>
+        <p><strong>Phone:</strong> +919876543210</p>
+        <p><strong>Address:</strong> BITS NARSAMPET WARANGAL 506331</p>
+    </div>
+
+    <div class="faq">
+        <h3>Frequently Asked Questions</h3>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(0)">How do I reset my password?</div>
+            <div class="faq-answer">Click on "Forgot Password" on the login page and enter your email and click reset password.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(1)">Is Chatly free to use?</div>
+            <div class="faq-answer">Yes! Chatly is completely free for basic usage.</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(2)">Can I use Chatly on my mobile?</div>
+            <div class="faq-answer">Yes, Chatly is fully responsive and works on both desktop and mobile devices.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(3)">Is my data secure on Chatly?</div>
+            <div class="faq-answer">Yes, we use end-to-end encryption to ensure your chats and data are safe.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleAnswer(4)">Can Chatly answer all types of questions?</div>
+            <div class="faq-answer">Chatly is designed to assist with general queries, but it may not have answers to highly specialized or sensitive topics because it is a predefined one.</div>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <h3>Send us a Message</h3>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="email" id="email" placeholder="Your Email">
+        <textarea id="message" rows="4" placeholder="Your Message"></textarea>
+        <button onclick="sendMessage()">Submit</button>
+    </div>
+
+    <div class="back-home">
+        <a href="chat.html">← Back to Chat page</a>
+    </div>
+</div>
+
+<script>
+    function toggleAnswer(index) {
+        const answers = document.querySelectorAll('.faq-answer');
+        answers[index].style.display = (answers[index].style.display === "block") ? "none" : "block";
+    }
+
+    function sendMessage() {
+        alert("Thank you for your message! We'll get back to you soon.");
+    }
+</script>
+</body>
+</html>

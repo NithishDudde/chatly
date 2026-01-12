@@ -1,0 +1,287 @@
+<!DOCTYPE html> 
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatly - Signup</title>
+    <style>
+        /* Importing Google Fonts - Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .title-container {
+            flex: 1;
+        }
+
+        .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .image-container {
+            flex-shrink: 0;
+        }
+
+        .logo {
+            height: 120px;
+            width: 90px;
+        }
+
+        .user-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+
+        .input-box {
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+        }
+
+        .input-box span.details {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .input-box input {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus,
+        .input-box input:valid {
+            border-color: #9b59b6;
+        }
+
+        /* Gender Section */
+        .gender-details {
+            margin-top: 20px;
+        }
+
+        .gender-title {
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .category {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .category label {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border: 1px solid #9b59b6;
+            border-radius: 5px;
+            margin: 5px;
+            transition: 0.3s ease;
+        }
+
+        .category label:hover {
+            background: rgba(155, 89, 182, 0.2);
+        }
+
+        .category input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #9b59b6;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .category input[type="radio"]:checked::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: #9b59b6;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Register Button */
+        .register-btn {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        /* Responsive Design */
+        @media(max-width: 584px) {
+            .container {
+                max-width: 100%;
+            }
+
+            .input-box {
+                width: 100%;
+            }
+
+            .category {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="title-container">
+                <div class="title">Signup</div><br>
+                <p><strong>Welcome to Chatly! Sign up here</strong></p>
+            </div>
+            <div class="image-container">
+                <img src="image1.png" alt="image logo" class="logo">
+            </div>
+        </div>
+        <div class="content">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Full Name</span>
+                    <input type="text" name="full_name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Username</span>
+                    <input type="text" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Email</span>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input type="tel" name="phone_number" placeholder="Enter your number" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Password</span>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="input-box">
+                    <span class="details">Confirm Password</span>
+                    <input type="password" name="confirm_password" placeholder="Confirm your password" required>
+                </div>
+            </div>
+
+            <!-- Gender Section -->
+            <div class="gender-details">
+                <span class="gender-title">Gender</span>
+                <div class="category">
+                    <label>
+                        <input type="radio" name="gender" value="Male" required>
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Female" required>
+                        Female
+                    </label>
+                    <label>
+                        <input type="radio" name="gender" value="Prefer not to say">
+                        Prefer not to say
+                    </label>
+                </div>
+            </div>
+
+            <!-- Register Button -->
+            <div style="margin-top: 20px;">
+                <button class="register-btn" onclick="window.location.href='index.html';">Register</button>
+            </div>
+        </div>
+    </div>
+<script>
+        function register() {
+            const fullName = document.getElementById("full_name").value;
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const phoneNumber = document.getElementById("phone_number").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+
+            if (!fullName || !username || !email || !phoneNumber || !password || !confirmPassword || !gender) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            alert(`Signup successful! Welcome, ${fullName} (${gender})`);
+            window.location.href = "index.html";
+        }
+</script>
+</body>
+</html>

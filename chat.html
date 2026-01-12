@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatly - Chatbot</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+            position: relative;
+        }
+
+        /* Chat Container */
+        .chat-container {
+            background-color: white;
+            width: 380px;
+            max-height: 600px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #fff;
+            padding: 10px 15px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .profile-container .circle {
+            width: 60px;
+            height: 60px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        /* User Details Modal */
+        .user-details-modal {
+            display: none;
+            position: absolute;
+            top: 100px;
+            right: 50px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 250px;
+            z-index: 10;
+        }
+
+        .user-details-modal h3 {
+            margin-top: 0;
+        }
+
+        .user-details-modal button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .user-details-modal button:hover {
+            background-color: #e60000;
+        }
+
+        /* Welcome Message */
+        #welcome-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4caf50;
+            color: white;
+            padding: 5px 0;
+            text-align: center;
+            font-weight: bold;
+            z-index: 1000;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chatbox */
+        #chatbox {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Chat Messages */
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            max-width: 75%;
+            word-wrap: break-word;
+            text-align: left;
+            align-self: flex-start; /* Ensures all messages start from the left */
+        }
+
+        /* User Message */
+        .user-message {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Bot Message */
+        .bot-message {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        /* Input Container */
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        input[type="text"] {
+            width: 75%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 20%;
+            min-width: 60px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        .about-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .about-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Message -->
+    <div id="welcome-message">....WELCOME TO CHATLY!....</div>
+
+    <!-- Profile Section -->
+    <div class="profile-container" onclick="toggleUserDetails()">
+        <div class="circle" id="userInitials">U</div>
+    </div>
+
+    <!-- User Details Modal -->
+    <div class="user-details-modal" id="userDetailsModal">
+        <h3>User Details:-</h3>
+        <p><strong>Name:</strong> <span id="fullName"></span></p>
+        <p><strong>Email:</strong> <span id="userEmail"></span></p>
+        <p><strong>Phone-No:</strong> <span id="userPhone"></span></p>
+        <p><strong>Gender:</strong> <span id="gender"></span></p>
+        <button onclick="logout()">Logout</button><br>
+        <a href="about-us.html" class="about-link">About Us</a>
+        <a href="contact-us.html" class="about-link">Contact Us</a>
+    </div>
+
+    <div class="chat-container">
+        <div id="chatbox"></div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message..." onkeydown="checkEnter(event)" />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("/user-details")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    document.getElementById("fullName").textContent = data.full_name;
+                    document.getElementById("userEmail").textContent = data.email;
+                    document.getElementById("userPhone").textContent = data.phone_number;
+                    document.getElementById("gender").textContent = data.gender;
+                    
+                    // Set user initials
+                    const initials = data.full_name.split(" ").map(name => name[0]).join("");
+                    document.getElementById("userInitials").textContent = initials.toUpperCase();
+                })
+                .catch(error => {
+                    console.error("Failed to load user details:", error);
+                });
+        });
+
+        function toggleUserDetails() {
+            var modal = document.getElementById('userDetailsModal');
+            modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function logout() {
+            alert('You are logging out...');
+            window.location.href = 'logout.html';
+        }
+
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            let userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            let chatbox = document.getElementById("chatbox");
+
+            // Append User Message (Left Aligned)
+            let userMessage = `<div class="message user-message">${userInput}</div>`;
+            chatbox.innerHTML += userMessage;
+
+            // Clear Input Field
+            document.getElementById("userInput").value = "";
+
+            // Auto Scroll to Bottom
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Simulated Bot Response
+            setTimeout(() => {
+                let botReply = getBotResponse(userInput);
+                let botMessage = `<div class="message bot-message">${botReply}</div>`;
+                chatbox.innerHTML += botMessage;
+
+                // Auto Scroll to Bottom
+                chatbox.scrollTop = chatbox.scrollHeight;
+            }, 1000); // 1-second delay for realism
+        }
+function getBotResponse(input) {
+    input = input.toLowerCase().trim().replace(/[?.!]/g, "").replace(/\s+/g, " ");
+
+    const responses = {
+        "hello": "Hi there! How can I help you?",
+        "hi": "Hey! How's your day going?",
+        "ok": "Alright! Let me know if you need anything else. 😊",
+        "how are you": "I'm just a bot, but I'm doing great! 😊",
+        "what is your name": "I am Chatly, your friendly chatbot!",
+        "who created you": "I was created by a developer who loves chatbots!",
+        "what can you do": "I can answer your questions and assist with various tasks within my limit.",
+        "tell me a joke": "Why did the scarecrow win an award?....... Because he was outstanding in his field! 😆",
+        "what is the weather like": "I can't check live weather, but you can use a weather app for accurate updates! ⛅",
+        "what is your favourite colour": "I like blue! It reminds me of the sky and the ocean. 🌊",
+        "how old are you": "I was created recently, so I guess I'm pretty young!",
+        "where do you live": "I live inside this chat application!",
+        "can you help me": "Of course! Let me know what you need help with.",
+        "project ideas in nodejs": `Sure! Here are some project ideas in Node.js:<br>
+        - Real-time chat application<br>
+        - Email-sender app<br>
+        - To-Do app<br>
+        - Food delivery app<br>
+        - E-commerce website<br>
+        - Restaurant management system<br>
+        - NLP bot<br>
+        - Doctor appointment system<br>
+        - Job board platform<br>
+        - Space Wizard Room booking app<br>
+        - Online Sports applications<br>
+        - Safety app and so on....`,
+        "goodbye": "See you next time!",
+        "bye": "Goodbye! Have a great day! 👋",
+        "thank you": "You're welcome! Let me know if you need further assistance.",
+        "thanks": "You're very welcome! 😊 Let me know if you need further assistance.",
+        "good morning": "Good morning! How can I help you today?",
+        "good": "Thanks for that!"
+    };
+
+    return responses[input] || "I'm not sure how to respond to that. Can you try asking something else?";
+    
+}
+
+ </script>
+</body>
+</html>
