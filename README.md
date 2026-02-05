@@ -1,4 +1,4 @@
-CHATLY – Rule-Based Chat Application
+# CHATLY – Rule-Based Chat Application
 
 Tech: HTML, CSS, JavaScript.
 
